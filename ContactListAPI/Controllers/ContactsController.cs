@@ -15,9 +15,9 @@ namespace ContactListAPI.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        private readonly ContactService _contactService;
+        private readonly IContactService _contactService;
 
-        public ContactsController(ContactService contactService)
+        public ContactsController(IContactService contactService)
         {
             _contactService = contactService;
         }

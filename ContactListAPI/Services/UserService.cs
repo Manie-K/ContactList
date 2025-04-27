@@ -15,43 +15,21 @@ namespace ContactListAPI.Services
             _context = context;
         }
 
-
-        private GetUserDTO UserToDTO(User user)
-        {
-            return new GetUserDTO
-            {
-                Name = user.Name,
-                Email = user.Email,
-                HashedPassword = user.HashedPassword,
-                Salt = user.Salt
-            };
-        }
-        public async Task<GetUserDTO?> GetUserByEmail(string email)
+        public async Task<User?> GetUserByEmail(string email)
         {
             User? user = await _context.Users.FirstOrDefaultAsync<User>(u => u.Email == email);
-            if (user == null)
-            {
-                return null;
-            }
-
-            GetUserDTO dto = UserToDTO(user);
-            return dto;
+            return user;
         }
 
-        public async Task<GetUserDTO?> GetUserById(int id)
+        public async Task<User?> GetUserById(int id)
         {
             User? user = await _context.Users.FirstOrDefaultAsync<User>(u => u.Id == id);
-            if (user == null)
-            {
-                return null;
-            }
-            GetUserDTO dto = UserToDTO(user);
-            return dto;
+            return user;
         }
 
         public async Task<User> AddUser(CreateUserDTO dto)
         {
-            var hmac = new System.Security.Cryptography.HMACSHA256();
+            using var hmac = new System.Security.Cryptography.HMACSHA256();
 
             User user = new User
             {
