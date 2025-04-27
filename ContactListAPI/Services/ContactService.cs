@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContactListAPI.Services
 {
-    public class ContactService
+    public class ContactService : IContactService
     {
         private readonly ContactListDataContext _context;
 

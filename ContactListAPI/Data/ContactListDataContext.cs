@@ -11,6 +11,7 @@ namespace ContactListAPI.Data
         }
 
         public DbSet<Contact> Contacts { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +23,13 @@ namespace ContactListAPI.Data
 
             modelBuilder.Entity<Contact>()
                 .HasIndex(c => c.Email)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.Id);
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
                 .IsUnique();
         }
     }

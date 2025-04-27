@@ -11,9 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add services to the container.
-builder.Services.AddScoped<TokenService>();
-builder.Services.AddScoped<ContactService>();
+// Add services to the container. 
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddDbContext<ContactListDataContext>(options =>
 {

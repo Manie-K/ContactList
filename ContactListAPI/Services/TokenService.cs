@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ContactListAPI.Services
 {
-    public class TokenService
+    public class TokenService : ITokenService
     {
         private readonly IConfiguration _configuration;
 
