@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContactListAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing contacts.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ContactsController : ControllerBase
@@ -19,6 +22,10 @@ namespace ContactListAPI.Controllers
             _contactService = contactService;
         }
 
+
+        /// <summary>
+        /// Returns a list of all contacts.
+        /// </summary>
         // GET: api/Contacts
         [HttpGet]
         public async Task<ActionResult<List<GetContactDTO>>> GetAllContacts()
@@ -27,6 +34,10 @@ namespace ContactListAPI.Controllers
             return res;
         }
 
+        /// <summary>
+        /// Returns a single contact with given id.
+        /// <paramref name="id"/>Id of the contact to get.</paramref>
+        /// </summary>
         // GET: api/Contacts/id
         [HttpGet("{id}")]
         public async Task<ActionResult<GetContactDTO>> GetContactById(int id)
@@ -39,6 +50,10 @@ namespace ContactListAPI.Controllers
             return res;
         }
 
+        /// <summary>
+        /// Creates a contact with given data.
+        /// <paramref name="dto"/> Dto of a contact to create.</paramref>
+        /// </summary>
         // POST: api/Contacts
         [HttpPost]
         public async Task<ActionResult<GetContactDTO>> CreateContact([FromBody] CreateContactDTO dto)
@@ -51,6 +66,11 @@ namespace ContactListAPI.Controllers
             return CreatedAtAction(nameof(GetContactById), new { id = createdDto.Id }, createdDto);
         }
 
+        /// <summary>
+        /// Updates a given contact with given data.
+        /// <paramref name="dto"/> Dto with new data.</paramref>
+        /// <paramref name="id"/> Id of the contact to update.</paramref>
+        /// </summary>
         // PUT: api/Contacts/id
         [HttpPut("{id}")]
         public async Task<ActionResult<GetContactDTO>> UpdateContact(int id, [FromBody] UpdateContactDTO dto)
@@ -69,6 +89,11 @@ namespace ContactListAPI.Controllers
             return updatedDto;
         }
 
+
+        /// <summary>
+        /// Deletes a contact with given id.
+        /// <paramref name="id"/> Id of the contact to delete.</paramref>
+        /// </summary>
         // DELETE: api/Contacts/id
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContact(int id)
