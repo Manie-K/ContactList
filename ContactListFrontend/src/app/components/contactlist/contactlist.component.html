@@ -1,0 +1,25 @@
+<p xmlns="http://www.w3.org/1999/html">contactlist works!</p>
+<div *ngIf="isLoggedIn">
+  <button type="button">Create new contact</button>
+</div>
+<div *ngFor="let basicContact of contacts">
+  <p>{{ basicContact.id }}</p>
+  <p>{{ basicContact.firstName }}</p>
+  <p>{{ basicContact.lastName }}</p>
+  <p>{{ basicContact.email }}</p>
+  <div>
+    <Button routerLink="/contacts/{{ basicContact.id }}">
+      Zobacz szczegóły
+    </Button>
+  </div>
+  <div *ngIf="isLoggedIn">
+    <Button>
+      Edytuj
+    </Button>
+  </div>
+  <div *ngIf="isLoggedIn">
+    <Button>
+      Usuń
+    </Button>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div *ngIf="contact !== null; else noContact">
+  <p>{{contact.id}}</p>
+  <p>{{contact.firstName}}</p>
+  <p>{{contact.lastName}}</p>
+  <p>{{contact.email}}</p>
+  <p>{{contact.category}}</p>
+  <p>{{contact?.subCategory}}</p>
+  <p>{{contact.phone}}</p>
+  <p>{{contact.dateOfBirth}}</p>
+</div>
+<ng-template #noContact>
+  <p>No contact found</p>
+</ng-template>
+<div>
+  <button type="button" routerLink="/contacts">
+    Back to contact list
+  </button>
+</div>
