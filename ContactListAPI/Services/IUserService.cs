@@ -5,8 +5,8 @@ namespace ContactListAPI.Services
 {
     public interface IUserService
     {
-        public Task<User?> GetUserById(int id);
-        public Task<User?> GetUserByEmail(string email);
-        public Task<User> AddUser(CreateUserDTO dto);
+        public Task<User?> GetUserByIdAsync(int id);
+        public Task<User?> GetUserByEmailAsync(string email);
+        public Task<User> AddUserAsync(CreateUserDTO dto);
     }
 }

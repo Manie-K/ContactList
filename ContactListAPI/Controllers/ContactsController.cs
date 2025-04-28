@@ -29,7 +29,7 @@ namespace ContactListAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<List<GetContactDTO>>> GetAllContacts()
         {
-            List<GetContactDTO> res = (await _contactService.GetAllContacts()).ToList();
+            List<GetContactDTO> res = (await _contactService.GetAllContactsAsync()).ToList();
             return res;
         }
 
@@ -42,7 +42,7 @@ namespace ContactListAPI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<GetContactDTO>> GetContactById(int id)
         {
-            GetContactDTO? res = await _contactService.GetContactById(id);
+            GetContactDTO? res = await _contactService.GetContactByIdAsync(id);
             if (res == null)
             {
                 return NotFound();
@@ -62,7 +62,7 @@ namespace ContactListAPI.Controllers
             {
                 return BadRequest();
             }
-            GetContactDTO createdDto = await _contactService.AddContact(dto);
+            GetContactDTO createdDto = await _contactService.AddContactAsync(dto);
             return CreatedAtAction(nameof(GetContactById), new { id = createdDto.Id }, createdDto);
         }
 
@@ -80,7 +80,7 @@ namespace ContactListAPI.Controllers
                 return BadRequest();
             }
 
-            GetContactDTO? updatedDto = await _contactService.UpdateContact(id, dto);
+            GetContactDTO? updatedDto = await _contactService.UpdateContactAsync(id, dto);
             if (updatedDto == null)
             {
                 return NotFound();
@@ -98,7 +98,7 @@ namespace ContactListAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteContact(int id)
         {
-            bool deleted = await _contactService.DeleteContact(id);
+            bool deleted = await _contactService.DeleteContactAsync(id);
             if (!deleted)
             {
                 return NotFound();

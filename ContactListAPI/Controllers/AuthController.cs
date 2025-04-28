@@ -23,7 +23,7 @@ namespace ContactListAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] UserLoginDTO dto)
         {
-            User? user = await _userService.GetUserByEmail(dto.Email);
+            User? user = await _userService.GetUserByEmailAsync(dto.Email);
             if (user == null)
             {
                 return NotFound("User not found");
@@ -43,12 +43,12 @@ namespace ContactListAPI.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<AuthResponseDTO>> RegisterAsync(CreateUserDTO dto)
         {
-            if(await _userService.GetUserByEmail(dto.Email) != null)
+            if(await _userService.GetUserByEmailAsync(dto.Email) != null)
             {
                 return BadRequest("User with such email already exists!");
             }
 
-            User user = await _userService.AddUser(dto);
+            User user = await _userService.AddUserAsync(dto);
 
             var token = _tokenService.GenerateToken(user);
             return Ok(new { token });

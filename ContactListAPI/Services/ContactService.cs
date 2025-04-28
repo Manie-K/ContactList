@@ -27,21 +27,21 @@ namespace ContactListAPI.Services
                 DateOfBirth = contact.DateOfBirth
             };
 
-        public async Task<IEnumerable<GetContactDTO>> GetAllContacts()
+        public async Task<IEnumerable<GetContactDTO>> GetAllContactsAsync()
         {
             IEnumerable<Contact> contacts = await _context.Contacts.ToListAsync();
             IEnumerable<GetContactDTO> dtos = contacts.Select(ContactToDTO);
             return dtos;
         }
 
-        public async Task<GetContactDTO?> GetContactById(int id)
+        public async Task<GetContactDTO?> GetContactByIdAsync(int id)
         {
             Contact? contact = await _context.Contacts.FindAsync(id);
             GetContactDTO? dto = contact == null ? null : ContactToDTO(contact);
             return dto;
         }
 
-        public async Task<GetContactDTO> AddContact(CreateContactDTO dto)
+        public async Task<GetContactDTO> AddContactAsync(CreateContactDTO dto)
         {
             Contact contact = new Contact
             {
@@ -60,7 +60,7 @@ namespace ContactListAPI.Services
             return ContactToDTO(contact);
         }
 
-        public async Task<GetContactDTO?> UpdateContact(int id, UpdateContactDTO dto)
+        public async Task<GetContactDTO?> UpdateContactAsync(int id, UpdateContactDTO dto)
         {
             Contact? contact = await _context.Contacts.FindAsync(id);
             if(contact == null)
@@ -80,7 +80,7 @@ namespace ContactListAPI.Services
             return ContactToDTO(contact);
         }
 
-        public async Task<bool> DeleteContact(int id)
+        public async Task<bool> DeleteContactAsync(int id)
         {
             Contact? contact = await _context.Contacts.FindAsync(id);
             if (contact == null)

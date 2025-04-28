@@ -15,19 +15,19 @@ namespace ContactListAPI.Services
             _context = context;
         }
 
-        public async Task<User?> GetUserByEmail(string email)
+        public async Task<User?> GetUserByEmailAsync(string email)
         {
             User? user = await _context.Users.FirstOrDefaultAsync<User>(u => u.Email == email);
             return user;
         }
 
-        public async Task<User?> GetUserById(int id)
+        public async Task<User?> GetUserByIdAsync(int id)
         {
             User? user = await _context.Users.FirstOrDefaultAsync<User>(u => u.Id == id);
             return user;
         }
 
-        public async Task<User> AddUser(CreateUserDTO dto)
+        public async Task<User> AddUserAsync(CreateUserDTO dto)
         {
             using var hmac = new System.Security.Cryptography.HMACSHA256();
 

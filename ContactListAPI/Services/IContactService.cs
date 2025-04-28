@@ -6,10 +6,10 @@ namespace ContactListAPI.Services
 {
     public interface IContactService
     {
-        public Task<IEnumerable<GetContactDTO>> GetAllContacts();
-        public Task<GetContactDTO?> GetContactById(int id);
-        public Task<GetContactDTO> AddContact(CreateContactDTO dto);
-        public Task<GetContactDTO?> UpdateContact(int id, UpdateContactDTO dto);
-        public Task<bool> DeleteContact(int id);
+        public Task<IEnumerable<GetContactDTO>> GetAllContactsAsync();
+        public Task<GetContactDTO?> GetContactByIdAsync(int id);
+        public Task<GetContactDTO> AddContactAsync(CreateContactDTO dto);
+        public Task<GetContactDTO?> UpdateContactAsync(int id, UpdateContactDTO dto);
+        public Task<bool> DeleteContactAsync(int id);
     }
 }
