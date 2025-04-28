@@ -1,0 +1,38 @@
+<div class="main-div">
+  <header>
+    <nav>
+      <div>
+        <h1>Welcome to the Contact List App!</h1>
+        <ul>
+        <li *ngIf="username !== ''; else noUsername">
+          Hello, {{ username }}!
+        </li>
+        <ng-template #noUsername>
+          <li>Not logged in!</li>
+        </ng-template>
+
+        <li *ngIf="isLoggedIn">
+          <button (click)="this.authService.logout()"> Wyloguj się </button>
+        </li>
+
+        <li *ngIf="!isLoggedIn">
+          <a href="/login"> Zaloguj się</a>
+        </li>
+
+        <li *ngIf="!isLoggedIn">
+          <a href="/register"> Zarejestruj się</a>
+        </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="content-div">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Contact list app</p>
+  </footer>
+
+</div>
