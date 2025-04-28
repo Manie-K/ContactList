@@ -5,7 +5,7 @@ import {ContactService} from '../../services/contact/contact.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-contactlist',
@@ -22,7 +22,7 @@ export class ContactlistComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
 
   private subscription: Subscription = Subscription.EMPTY;
-  constructor(private contactService: ContactService, private authService:AuthService) { }
+  constructor(private contactService: ContactService, private authService:AuthService, private router: Router) { }
 
   ngOnInit() {
     this.contactService.getAllContacts().subscribe(contacts => this.contacts = contacts);
@@ -39,5 +39,20 @@ export class ContactlistComponent implements OnInit, OnDestroy {
 
   private checkLogin(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
+  }
+
+  goToCreateContact() {
+    this.router.navigate(['/contacts/create']);
+  }
+  deleteContact(id: number) {
+    this.contactService.deleteContact(id).subscribe({
+      next: () =>
+      {
+        this.router.navigate(['/contacts']);
+      },
+      error: (error) => {
+        console.error('Error deleting contact:', error);
+      }
+    });
   }
 }

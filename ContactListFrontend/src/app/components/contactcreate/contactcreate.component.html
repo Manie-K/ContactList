@@ -1,0 +1,62 @@
+<form (ngSubmit)="createContact()">
+  <div>
+    <label for="firstName">Imię:</label>
+    <input type="text" [(ngModel)]="firstName" name="firstName" required placeholder="Wpisz imię" />
+  </div>
+  <div>
+    <label for="lastName">Nazwisko:</label>
+    <input type="text" [(ngModel)]="lastName" name="lastName" required placeholder="Wpisz nazwisko" />
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" [(ngModel)]="email" name="email" required placeholder="Wpisz email" />
+  </div>
+
+  <div>
+    <div *ngFor="let category of categories">
+      <input required
+        type="radio"
+        [id]="'category_' + category.id"
+        name="selectedCategory"
+        [value]="category"
+        [(ngModel)]="selectedCategory"
+        (change)="onCategoryChange()"
+      />
+      <label [for]="'category_' + category.id">{{ category.name }}</label>
+    </div>
+  </div>
+
+  <div *ngIf="selectedCategory!=null">
+    <h4>Wybrana kategoria: {{ selectedCategory.name }}</h4>
+    <div *ngIf="selectedCategory.allowCustomSubcategory == true">
+      <label for="sub">Podkategoria: </label>
+      <input required type="text" name="sub" [(ngModel)]="selectedSubcategory" placeholder="Wpisz podkategorię"/>
+    </div>
+    <div *ngIf="selectedCategory.allowCustomSubcategory == false">
+      <div *ngFor="let category of selectedCategory.subcategories">
+        <input required
+               type="radio"
+               [id]=category
+               name="selectedSubcategory"
+               [value]="category"
+               [(ngModel)]="selectedSubcategory"
+        />
+        <label [for]="category">{{ category }}</label>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selectedSubcategory!=null">
+    <h4>Wybrana podkategoria: {{ selectedSubcategory }}</h4>
+  </div>
+
+  <div>
+    <label for="phone">Telefon:</label>
+    <input type="text" [(ngModel)]="phone" name="phone" required placeholder="Wpisz telefon" />
+  </div>
+
+  <div>
+    <label for="dateOfBirth">Data urodzenia:</label>
+    <input type="date" [(ngModel)]="dateOfBirth" name="dateOfBirth" required placeholder="Wybierz datę" />
+  </div>
+  <button type="submit">Stwórz kontakt</button>
+</form>

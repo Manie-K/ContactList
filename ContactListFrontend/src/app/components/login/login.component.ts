@@ -20,7 +20,15 @@ export class LoginComponent{
 
   login():void  {
     const loginData = {email: this.email, password: this.password};
-    this.authService.login(loginData).subscribe();
-    this.router.navigate(['/contacts']);
+    this.authService.login(loginData).subscribe(
+      (response) => {
+        console.log('Login successful');
+        this.router.navigate(['/contacts']);
+      },
+      (error) => {
+        console.error('Login failed', error);
+        alert('Login failed. Please check your credentials.');
+      }
+    );
   }
 }

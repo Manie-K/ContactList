@@ -1,24 +1,26 @@
 <div *ngIf="isLoggedIn">
-  <button type="button">Create new contact</button>
+  <button type="button" (click)="goToCreateContact()">Stwórz nowy kontakt</button>
 </div>
-<div *ngFor="let basicContact of contacts">
-  <p>{{ basicContact.id }}</p>
-  <p>{{ basicContact.firstName }}</p>
-  <p>{{ basicContact.lastName }}</p>
-  <p>{{ basicContact.email }}</p>
-  <div>
-    <Button routerLink="/contacts/{{ basicContact.id }}">
-      Zobacz szczegóły
-    </Button>
-  </div>
-  <div *ngIf="isLoggedIn">
-    <Button>
-      Edytuj
-    </Button>
-  </div>
-  <div *ngIf="isLoggedIn">
-    <Button>
-      Usuń
-    </Button>
+<div class="contact-list-div">
+  <div class="contact-list-item-div" *ngFor="let basicContact of contacts">
+    <p>ID: {{ basicContact.id }}</p>
+    <p>Imię: {{ basicContact.firstName }}</p>
+    <p>Nazwisko: {{ basicContact.lastName }}</p>
+    <p>Email: {{ basicContact.email }}</p>
+    <div>
+      <Button routerLink="/contacts/{{ basicContact.id }}">
+        Zobacz szczegóły
+      </Button>
+    </div>
+    <div *ngIf="isLoggedIn">
+      <Button>
+        Edytuj
+      </Button>
+    </div>
+    <div *ngIf="isLoggedIn">
+      <Button (click)="deleteContact(basicContact.id)">
+        Usuń
+      </Button>
+    </div>
   </div>
 </div>

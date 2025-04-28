@@ -1,18 +1,18 @@
 <div *ngIf="contact !== null; else noContact">
-  <p>{{contact.id}}</p>
-  <p>{{contact.firstName}}</p>
-  <p>{{contact.lastName}}</p>
-  <p>{{contact.email}}</p>
-  <p>{{contact.category}}</p>
-  <p>{{contact?.subCategory}}</p>
-  <p>{{contact.phone}}</p>
-  <p>{{contact.dateOfBirth}}</p>
+  <p>ID: {{contact.id}}</p>
+  <p>Imię: {{contact.firstName}}</p>
+  <p>Nazwisko: {{contact.lastName}}</p>
+  <p>Email: {{contact.email}}</p>
+  <p>Kategoria: {{contact.category}}</p>
+  <p *ngIf="contact.subcategory!=null">Podkategoria: {{contact.subcategory}}</p>
+  <p>Telefon: {{contact.phone}}</p>
+  <p>Data urodzenia: {{contact.dateOfBirth}}</p>
 </div>
 <ng-template #noContact>
-  <p>No contact found</p>
+  <p>Nie znaleziono kontaktu :c</p>
 </ng-template>
 <div>
   <button type="button" routerLink="/contacts">
-    Back to contact list
+    Powrót do listy kontaktów.
   </button>
 </div>
