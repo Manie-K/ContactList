@@ -21,6 +21,11 @@ header h1 {
   font-size: 24px;
 }
 
+header nav div h1 a{
+  color: white;
+  text-decoration: none;
+}
+
 header nav div{
   display: flex;
   justify-content: space-between;

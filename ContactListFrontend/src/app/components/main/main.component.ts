@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
 import {NgIf} from '@angular/common';
@@ -8,7 +8,8 @@ import {NgIf} from '@angular/common';
   selector: 'app-main',
   imports: [
     RouterOutlet,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
