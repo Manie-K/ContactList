@@ -1,10 +1,7 @@
-﻿using ContactListAPI.Data;
-using ContactListAPI.DTO;
-using ContactListAPI.Models;
+﻿using ContactListAPI.DTO;
 using ContactListAPI.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ContactListAPI.Controllers
 {
@@ -13,6 +10,7 @@ namespace ContactListAPI.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ContactsController : ControllerBase
     {
         private readonly IContactService _contactService;
@@ -28,6 +26,7 @@ namespace ContactListAPI.Controllers
         /// </summary>
         // GET: api/Contacts
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<GetContactDTO>>> GetAllContacts()
         {
             List<GetContactDTO> res = (await _contactService.GetAllContacts()).ToList();
@@ -40,6 +39,7 @@ namespace ContactListAPI.Controllers
         /// </summary>
         // GET: api/Contacts/id
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<GetContactDTO>> GetContactById(int id)
         {
             GetContactDTO? res = await _contactService.GetContactById(id);
@@ -51,7 +51,7 @@ namespace ContactListAPI.Controllers
         }
 
         /// <summary>
-        /// Creates a contact with given data.
+        /// Creates a contact with given data. Authorization is required.
         /// <paramref name="dto"/> Dto of a contact to create.</paramref>
         /// </summary>
         // POST: api/Contacts
@@ -67,7 +67,7 @@ namespace ContactListAPI.Controllers
         }
 
         /// <summary>
-        /// Updates a given contact with given data.
+        /// Updates a given contact with given data. Authorization is required.
         /// <paramref name="dto"/> Dto with new data.</paramref>
         /// <paramref name="id"/> Id of the contact to update.</paramref>
         /// </summary>
@@ -91,7 +91,7 @@ namespace ContactListAPI.Controllers
 
 
         /// <summary>
-        /// Deletes a contact with given id.
+        /// Deletes a contact with given id. Authorization is required.
         /// <paramref name="id"/> Id of the contact to delete.</paramref>
         /// </summary>
         // DELETE: api/Contacts/id
