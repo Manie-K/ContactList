@@ -35,7 +35,17 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
 });
 
 // Configure CORS policy
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            //TODO: Allow only frontend app
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 
 var app = builder.Build();
@@ -43,6 +53,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    //TODO: Add xml to swagger docs
     app.UseSwagger();
     app.UseSwaggerUI();
 }
