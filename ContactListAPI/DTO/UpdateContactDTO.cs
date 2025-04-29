@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ContactListAPI.Controllers;
 
 namespace ContactListAPI.DTO
 {
     /// <summary>
-    /// DTO used in the PUT request to update a contact.
+    /// DTO used in the PUT request to <see cref="ContactsController"/> to update an existing contact.
     /// </summary>
     public class UpdateContactDTO
     {

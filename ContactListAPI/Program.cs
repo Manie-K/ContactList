@@ -10,7 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+});
 
 // Add services to the container. 
 builder.Services.AddScoped<ITokenService, TokenService>();
@@ -45,7 +50,6 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontendOnly",policy => {
-            //TODO: Allow only frontend app
             policy.WithOrigins("http://localhost:4200")
                   .AllowAnyMethod()
                   .AllowAnyHeader();

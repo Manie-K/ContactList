@@ -1,8 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using ContactListAPI.Validation;
+using ContactListAPI.Controllers;
 
 namespace ContactListAPI.DTO
 {
+    /// <summary>
+    /// DTO used in the POST request to <see cref="AuthController"/> to register a new user.
+    /// </summary>
     public class CreateUserDTO
     {
         [MinLength(2)]

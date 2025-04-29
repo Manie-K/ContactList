@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContactListAPI.Controllers
 {
+    /// <summary>
+    /// Controller for managing user login and registration.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -20,6 +23,10 @@ namespace ContactListAPI.Controllers
             _tokenService = tokenService;
         }
 
+        /// <summary>
+        /// Handles user login.
+        /// <returns>A token and user name if login is successful.</returns>
+        /// </summary>
         [HttpPost("login")]
         public async Task<ActionResult<AuthResponseDTO>> Login([FromBody] UserLoginDTO dto)
         {
@@ -41,6 +48,10 @@ namespace ContactListAPI.Controllers
             return Ok(new AuthResponseDTO(){ Token = token, Name = user.Name });
         }
 
+        /// <summary>
+        /// Handles user registration.
+        /// <returns>A token and user name if registration is successful.</returns>
+        /// </summary>
         [HttpPost("register")]
         public async Task<ActionResult<AuthResponseDTO>> RegisterAsync(CreateUserDTO dto)
         {

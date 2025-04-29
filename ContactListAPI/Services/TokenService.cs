@@ -18,7 +18,7 @@ namespace ContactListAPI.Services
 
         /// <summary>
         /// Generates a JWT token for the given user.
-        /// <paramref name="user"/>User which receives token.</paramred>
+        /// <paramref name="user"/>User which receives token.
         /// <returns>JWT token as a string.</returns>
         /// </summary>
         public string GenerateToken(User user)

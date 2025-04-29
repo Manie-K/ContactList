@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContactListAPI.Services
 {
+    /// <summary>
+    /// Service for managing contacts.
+    /// </summary>
     public interface IContactService
     {
         public Task<IEnumerable<GetContactBasicDTO>> GetAllContactsAsync();

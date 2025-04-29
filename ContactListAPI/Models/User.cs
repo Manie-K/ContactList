@@ -2,6 +2,9 @@
 
 namespace ContactListAPI.Models
 {
+    /// <summary>
+    /// Represents a user account in the system.
+    /// </summary>
     public class User
     {
         public int Id { get; set; }

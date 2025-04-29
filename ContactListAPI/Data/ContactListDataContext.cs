@@ -41,7 +41,7 @@ namespace ContactListAPI.Data
             );
 
 
-            //TODO: Constrains
+            //Constrains
             modelBuilder.Entity<Contact>()
                 .HasKey(c => c.Id);
 

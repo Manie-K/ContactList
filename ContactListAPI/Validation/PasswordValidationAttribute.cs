@@ -5,6 +5,10 @@ namespace ContactListAPI.Validation
     public class PasswordValidationAttribute:ValidationAttribute
     {
         private const int MinLength = 8;
+
+        /// <summary>
+        /// Ensured that the password passes all modern security requirenments.
+        /// </summary>
         public override bool IsValid(object? value)
         {
             var password = value as string;

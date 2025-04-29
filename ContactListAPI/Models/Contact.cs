@@ -2,6 +2,9 @@
 
 namespace ContactListAPI.Models
 {
+    /// <summary>
+    /// Represents a contact in the system.
+    /// </summary>
     public class Contact
     {
         public int Id { get; set; } 

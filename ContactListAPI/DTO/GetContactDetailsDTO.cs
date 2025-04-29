@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ContactListAPI.Controllers;
 
 namespace ContactListAPI.DTO
 {
     /// <summary>
-    /// DTO used to represent a contact in the response.
+    /// DTO used in the GET request to <see cref="ContactsController"/> to get a detailed info about given contact.
     /// </summary>
     public class GetContactDetailsDTO
     {

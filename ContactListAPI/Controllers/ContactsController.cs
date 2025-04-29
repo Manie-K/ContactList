@@ -35,7 +35,7 @@ namespace ContactListAPI.Controllers
 
         /// <summary>
         /// Returns a single contact with given id.
-        /// <paramref name="id"/>Id of the contact to get.</paramref>
+        /// <paramref name="id">Id of the contact to get.</paramref>
         /// </summary>
         // GET: api/Contacts/id
         [HttpGet("{id}")]
@@ -52,7 +52,7 @@ namespace ContactListAPI.Controllers
 
         /// <summary>
         /// Creates a contact with given data. Authorization is required.
-        /// <paramref name="dto"/> Dto of a contact to create.</paramref>
+        /// <paramref name="dto"> Dto of a contact to create.</paramref>
         /// </summary>
         // POST: api/Contacts
         [HttpPost]
@@ -72,8 +72,8 @@ namespace ContactListAPI.Controllers
 
         /// <summary>
         /// Updates a given contact with given data. Authorization is required.
-        /// <paramref name="dto"/> Dto with new data.</paramref>
-        /// <paramref name="id"/> Id of the contact to update.</paramref>
+        /// <paramref name="dto"> Dto with new data.</paramref>
+        /// <paramref name="id"> Id of the contact to update.</paramref>
         /// </summary>
         // PUT: api/Contacts/id
         [HttpPut("{id}")]
@@ -96,7 +96,7 @@ namespace ContactListAPI.Controllers
 
         /// <summary>
         /// Deletes a contact with given id. Authorization is required.
-        /// <paramref name="id"/> Id of the contact to delete.</paramref>
+        /// <paramref name="id"> Id of the contact to delete.</paramref>
         /// </summary>
         // DELETE: api/Contacts/id
         [HttpDelete("{id}")]

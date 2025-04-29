@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ContactListAPI.Controllers;
 using ContactListAPI.Validation;
 
 namespace ContactListAPI.DTO
 {
     /// <summary>
-    /// DTO used in the POST request to create a new contact.
+    /// DTO used in the POST request to <see cref="ContactsController"/> to create a new contact.
     /// </summary>
     public class CreateContactDTO
     {
