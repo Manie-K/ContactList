@@ -6,7 +6,7 @@
 
 ## Technologie
 
-- Backend ->  ASP.NET core web API + SQLServer  
+- Backend -> (.Net 8.0) ASP.NET Core web API + SQLServer  
   *Wykorzystano między innymi EntityFramework, FluentValidation, AutoMapper, JWT*
 
 - Frontend -> Angular SPA
@@ -23,7 +23,7 @@
 ### Backend
  - Upewnić się, że zainstalowany jest SQLServer
  - Otworzyć plik .sln
- - W konsoli deweloperskiej VS wpisać polecenie "Update-Database" w celu wykonania migracji.
+ - W konsoli deweloperskiej VS wpisać polecenie "Update-Database" w celu wykonania migracji. *Wymaga pakietu EFC.Tools*
  - Uruchomić z opcją "https"
  
 ### Frontend
