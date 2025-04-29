@@ -5,7 +5,7 @@ namespace ContactListAPI.DTO
     /// <summary>
     /// DTO used to represent a contact in the response.
     /// </summary>
-    public class GetContactDTO
+    public class GetContactDetailsDTO
     {
         public int Id { get; set; }
         [MinLength(2)]

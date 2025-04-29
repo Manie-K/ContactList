@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using AutoMapper;
 using ContactListAPI.Data;
 using ContactListAPI.DTO;
 using ContactListAPI.Models;
@@ -10,46 +11,37 @@ namespace ContactListAPI.Services
     public class ContactService : IContactService
     {
         private readonly ContactListDataContext _context;
+        private readonly IMapper _mapper;
 
-        public ContactService(ContactListDataContext context)
+        public ContactService(ContactListDataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        private GetContactDTO ContactToDTO(Contact contact) =>
-           new GetContactDTO
-           {
-               Id = contact.Id,
-               FirstName = contact.FirstName,
-               LastName = contact.LastName,
-               Email = contact.Email,
-               Category = contact.Category,
-               Subcategory = contact.Subcategory,
-               Phone = contact.Phone,
-               DateOfBirth = contact.DateOfBirth
-           };
-
-        public async Task<IEnumerable<GetBasicContactDTO>> GetAllContactsAsync()
+        public async Task<IEnumerable<GetContactBasicDTO>> GetAllContactsAsync()
         {
             IEnumerable<Contact> contacts = await _context.Contacts.ToListAsync();
-            IEnumerable<GetBasicContactDTO> dtos = contacts.Select(c => new GetBasicContactDTO
+            IEnumerable<GetContactBasicDTO> dtos;
+            /*dtos = contacts.Select(c => new GetContactBasicDTO
             {
                 Id = c.Id,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Email = c.Email
-            });
+            });*/
+            dtos = contacts.Select(_mapper.Map<GetContactBasicDTO>);
             return dtos;
         }
 
-        public async Task<GetContactDTO?> GetContactByIdAsync(int id)
+        public async Task<GetContactDetailsDTO?> GetContactByIdAsync(int id)
         {
             Contact? contact = await _context.Contacts.FindAsync(id);
-            GetContactDTO? dto = contact == null ? null : ContactToDTO(contact);
+            GetContactDetailsDTO? dto = contact == null ? null : _mapper.Map<GetContactDetailsDTO>(contact);
             return dto;
         }
 
-        public async Task<GetContactDTO?> AddContactAsync(CreateContactDTO dto)
+        public async Task<GetContactDetailsDTO?> AddContactAsync(CreateContactDTO dto)
         {
             bool emailTaken = false;
             var allContacts = await _context.Contacts.ToListAsync();
@@ -85,10 +77,10 @@ namespace ContactListAPI.Services
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
-            return ContactToDTO(contact);
+            return _mapper.Map<GetContactDetailsDTO>(contact);
         }
 
-        public async Task<GetContactDTO?> UpdateContactAsync(int id, UpdateContactDTO dto)
+        public async Task<GetContactDetailsDTO?> UpdateContactAsync(int id, UpdateContactDTO dto)
         {
             Contact? contact = await _context.Contacts.FindAsync(id);
             if(contact == null)
@@ -105,7 +97,7 @@ namespace ContactListAPI.Services
             contact.DateOfBirth = dto.DateOfBirth;
 
             await _context.SaveChangesAsync();
-            return ContactToDTO(contact);
+            return _mapper.Map<GetContactDetailsDTO>(contact);
         }
 
         public async Task<bool> DeleteContactAsync(int id)

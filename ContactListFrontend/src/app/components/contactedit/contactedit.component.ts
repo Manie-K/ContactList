@@ -43,7 +43,7 @@ export class ContacteditComponent implements OnInit {
       this.subcategory = contact.subcategory;
       this.selectedSubcategory = contact.subcategory;
       this.phone = contact.phone;
-      this.dateOfBirth = new Date(contact.dateOfBirth);
+      this.dateOfBirth = contact.dateOfBirth;
     })
 
 

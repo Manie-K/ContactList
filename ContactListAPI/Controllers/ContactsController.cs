@@ -27,9 +27,9 @@ namespace ContactListAPI.Controllers
         // GET: api/Contacts
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<List<GetBasicContactDTO>>> GetAllContacts()
+        public async Task<ActionResult<List<GetContactBasicDTO>>> GetAllContacts()
         {
-            List<GetBasicContactDTO> res = (await _contactService.GetAllContactsAsync()).ToList();
+            List<GetContactBasicDTO> res = (await _contactService.GetAllContactsAsync()).ToList();
             return res;
         }
 
@@ -40,9 +40,9 @@ namespace ContactListAPI.Controllers
         // GET: api/Contacts/id
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<GetContactDTO>> GetContactById(int id)
+        public async Task<ActionResult<GetContactDetailsDTO>> GetContactById(int id)
         {
-            GetContactDTO? res = await _contactService.GetContactByIdAsync(id);
+            GetContactDetailsDTO? res = await _contactService.GetContactByIdAsync(id);
             if (res == null)
             {
                 return NotFound();
@@ -56,13 +56,13 @@ namespace ContactListAPI.Controllers
         /// </summary>
         // POST: api/Contacts
         [HttpPost]
-        public async Task<ActionResult<GetContactDTO>> CreateContact([FromBody] CreateContactDTO dto)
+        public async Task<ActionResult<GetContactDetailsDTO>> CreateContact([FromBody] CreateContactDTO dto)
         {
             if (dto == null)
             {
                 return BadRequest();
             }
-            GetContactDTO? createdDto = await _contactService.AddContactAsync(dto);
+            GetContactDetailsDTO? createdDto = await _contactService.AddContactAsync(dto);
             if (createdDto == null)
             {
                 return BadRequest();
@@ -77,14 +77,14 @@ namespace ContactListAPI.Controllers
         /// </summary>
         // PUT: api/Contacts/id
         [HttpPut("{id}")]
-        public async Task<ActionResult<GetContactDTO>> UpdateContact(int id, [FromBody] UpdateContactDTO dto)
+        public async Task<ActionResult<GetContactDetailsDTO>> UpdateContact(int id, [FromBody] UpdateContactDTO dto)
         {
             if (dto == null)
             {
                 return BadRequest();
             }
 
-            GetContactDTO? updatedDto = await _contactService.UpdateContactAsync(id, dto);
+            GetContactDetailsDTO? updatedDto = await _contactService.UpdateContactAsync(id, dto);
             if (updatedDto == null)
             {
                 return NotFound();

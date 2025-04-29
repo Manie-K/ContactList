@@ -4,14 +4,13 @@ namespace ContactListAPI.Models
 {
     public class Contact
     {
-        //TODO: Add constraints and validation
-        public int Id { get; set; } //PK
+        public int Id { get; set; } 
         [MinLength(2)]
         public required string FirstName { get; set; }
         [MinLength(2)]
         public required string LastName { get; set; }
         [EmailAddress]
-        public required string Email { get; set; } //Unique
+        public required string Email { get; set; }
         public required byte[] PasswordHash { get; set; } //Technical requirement
         public required byte[] PasswordSalt { get; set; } 
         public required string Category { get; set; }

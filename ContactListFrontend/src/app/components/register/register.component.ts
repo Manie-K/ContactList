@@ -21,7 +21,13 @@ export class RegisterComponent {
 
   register():void  {
     const registerData = {name: this.name, email: this.email, password: this.password};
-    this.authService.register(registerData).subscribe();
-    this.router.navigate(['/contacts']);
+    this.authService.register(registerData).subscribe((response) => {
+        console.log('Register successful');
+        this.router.navigate(['/contacts']);
+      },
+      (error) => {
+        console.error('Register failed', error);
+        alert('Register failed. Please check your credentials.');
+      });
   }
 }

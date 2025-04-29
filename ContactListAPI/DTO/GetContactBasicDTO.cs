@@ -2,7 +2,7 @@
 
 namespace ContactListAPI.DTO
 {
-    public class GetBasicContactDTO
+    public class GetContactBasicDTO
     {
         public int Id { get; set; }
         [MinLength(2)]

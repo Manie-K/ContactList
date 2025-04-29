@@ -1,5 +1,6 @@
 using System.Text;
 using ContactListAPI.Data;
+using ContactListAPI.DataMapping;
 using ContactListAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,15 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+
+// Configure dbContext
 builder.Services.AddDbContext<ContactListDataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultLocalConnection"));
 });
+
+// Configure AutoMapper
+builder.Services.AddAutoMapper(typeof(ContactMapperProfile));
 
 // Configure JWT authentication
 builder.Services.AddAuthentication().AddJwtBearer(options =>
@@ -40,9 +46,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontendOnly",policy => {
             //TODO: Allow only frontend app
-            policy.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
         });
 });
 
