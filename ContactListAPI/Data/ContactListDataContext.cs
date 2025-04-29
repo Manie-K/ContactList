@@ -1,4 +1,5 @@
-﻿using ContactListAPI.Models;
+﻿using System.Text;
+using ContactListAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactListAPI.Data
