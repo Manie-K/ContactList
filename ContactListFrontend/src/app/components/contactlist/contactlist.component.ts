@@ -48,7 +48,7 @@ export class ContactlistComponent implements OnInit, OnDestroy {
     this.contactService.deleteContact(id).subscribe({
       next: () =>
       {
-        this.router.navigate(['/contacts']);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         console.error('Error deleting contact:', error);

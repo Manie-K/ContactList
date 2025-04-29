@@ -1,4 +1,4 @@
-<form (ngSubmit)="createContact()">
+<form (ngSubmit)="updateContact()">
   <div>
     <label for="firstName">Imię:</label>
     <input type="text" [(ngModel)]="firstName" name="firstName" required placeholder="Wpisz imię" />
@@ -8,24 +8,14 @@
     <input type="text" [(ngModel)]="lastName" name="lastName" required placeholder="Wpisz nazwisko" />
   </div>
   <div>
-    <label for="email">Email:</label>
-    <input type="email" [(ngModel)]="email" name="email" required placeholder="Wpisz email" />
-  </div>
-
-  <div>
-    <label for="pass">Hasło:</label>
-    <input type="password" [(ngModel)]="password" name="pass" required placeholder="Wpisz hasło" />
-  </div>
-
-  <div>
     <div *ngFor="let category of categories">
       <input required
-        type="radio"
-        [id]="'category_' + category.id"
-        name="selectedCategory"
-        [value]="category"
-        [(ngModel)]="selectedCategory"
-        (change)="onCategoryChange()"
+             type="radio"
+             [id]="'category_' + category.id"
+             name="selectedCategory"
+             [value]="category"
+             [(ngModel)]="selectedCategory"
+             (change)="onCategoryChange()"
       />
       <label [for]="'category_' + category.id">{{ category.name }}</label>
     </div>
@@ -59,5 +49,5 @@
     <label for="dateOfBirth">Data urodzenia:</label>
     <input type="date" [(ngModel)]="dateOfBirth" name="dateOfBirth" required placeholder="Wybierz datę" />
   </div>
-  <button type="submit">Stwórz kontakt</button>
+  <button type="submit">Edytuj kontakt</button>
 </form>

@@ -7,6 +7,7 @@ import {Observable, tap} from 'rxjs';
 // @ts-ignore
 import {DetailContactDTO} from '../../models/contact/DetailContactDTO';
 import {CreateContactDTO} from '../../models/contact/CreateContactDTO';
+import {UpdateContactDTO} from '../../models/contact/UpdateContactDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,12 @@ export class ContactService {
     const url: string = `${environment.apiUrl}/contacts`;
     const headers = new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('token') });
     return this.http.post<DetailContactDTO>(url, contact, {headers});
+  }
+
+  updateContact(id: number, contact: UpdateContactDTO) : Observable<DetailContactDTO>
+  {
+    const url: string = `${environment.apiUrl}/contacts/${id}`;
+    const headers = new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('token') });
+    return this.http.put<DetailContactDTO>(url, contact, {headers});
   }
 }

@@ -17,4 +17,17 @@ export class CategoryService {
     const headers = new HttpHeaders({ 'Authorization': 'Bearer ' + sessionStorage.getItem('token') });
     return this.http.get<GetCategoryDTO[]>(url, {headers});
   }
+
+  getCategoryByName(name: string): GetCategoryDTO|undefined {
+    let cat: GetCategoryDTO | undefined;
+    this.getAllCategories().subscribe(categories => {
+      const category = categories.find(category => category.name === name);
+      if (category) {
+        cat = category;
+      } else {
+        throw new Error('Category not found');
+      }
+    })
+    return cat;
+  }
 }

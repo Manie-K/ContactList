@@ -21,6 +21,7 @@ export class ContactcreateComponent implements OnInit {
   firstName: string = '';
   lastName: string = '';
   email: string = '';
+  password: string = '';
   category: string = '';
   subcategory: string | null = null;
   phone: string = '';
@@ -49,6 +50,7 @@ export class ContactcreateComponent implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
+      password: this.password,
       category: this.selectedCategory? this.selectedCategory.name : "",
       subcategory: this.selectedSubcategory? this.selectedSubcategory : null,
       phone: this.phone,

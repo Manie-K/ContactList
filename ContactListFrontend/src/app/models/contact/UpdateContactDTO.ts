@@ -1,8 +1,6 @@
-﻿export interface CreateContactDTO {
+﻿export interface UpdateContactDTO {
   firstName: string;
   lastName: string;
-  email: string;
-  password: string;
   category: string;
   subcategory: string | null;
   phone: string;
