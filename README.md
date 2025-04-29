@@ -1,1 +1,37 @@
-# ContactList
+# Contact list app
+
+- Aplikacja webowa umożliwiająca operacje CRUD na liście kontaktów. 
+- Umożliwia logowanie i rejestracje użytkowników.
+- Hasła są hashowane, a operacje edycji, usunięcia i dodania nowego kontaktu dostępne są tylko po zalogowaniu.
+
+## Technologie
+
+- Backend ->  ASP.NET core web API + SQLServer  
+  *Wykorzystano między innymi EntityFramework, FluentValidation, AutoMapper, JWT*
+
+- Frontend -> Angular SPA
+
+
+## Struktura backend (główne komponenty)
+- Controllers -> kontrolery API
+- DTO -> Obiekty transferu danych
+- Migrations -> Migracje bazy danych
+- Models -> Modele wykorzystywane w bazie danych
+- Services -> Serwisy umożliwiające komunikację kontrolerów z bazą danych
+
+## Jak uruchomić?
+### Backend
+ - Upewnić się, że zainstalowany jest SQLServer
+ - Otworzyć plik .sln
+ - W konsoli deweloperskiej VS wpisać polecenie "Update-Database" w celu wykonania migracji.
+ - Uruchomić z opcją "https"
+ 
+### Frontend
+ - "npm install -g @angular/cli"
+ - Wejść w folder projektu, a następnie wpisać komendę "npm install"
+ - "ng serve"
+
+
+### W przypadku problemów
+ - Upewnić się, że backend działa na porcie 7011, a frontend na porcie 4200
+ - W przypadku problemów z pakietami wpisać "dotnet restore" w konsoli deweloperskiej VisualStudio.
