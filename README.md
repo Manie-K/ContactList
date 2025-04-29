@@ -5,6 +5,8 @@
 - Hasła są hashowane, a operacje edycji, usunięcia i dodania nowego kontaktu dostępne są tylko po zalogowaniu.
 
 ## Użycie aplikacji
+ - Uruchom backend i frontend (instrukcja na dole!)
+ - Wejdź na localhost:4200
  - Zarejestruj się
  - Możesz przeglądać, dodawać, edytować i usuwać kontakty!
  - Śmiało możesz dodać pierwszy kontakt!

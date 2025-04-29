@@ -2,29 +2,34 @@
   <button type="button" (click)="goToCreateContact()">Stwórz nowy kontakt</button>
 </div>
 <div class="contact-list-div">
-  <div class="contact-list-item-div" *ngFor="let basicContact of contacts">
-    <div>
-      <p>ID: {{ basicContact.id }}</p>
-      <p>Imię: {{ basicContact.firstName }}</p>
-      <p>Nazwisko: {{ basicContact.lastName }}</p>
-      <p>Email: {{ basicContact.email }}</p>
-    </div>
-    <div>
+  <div *ngIf="contacts.length != 0; else noContacts">
+    <div class="contact-list-item-div" *ngFor="let basicContact of contacts">
       <div>
-        <Button routerLink="/contacts/{{ basicContact.id }}">
-          Zobacz szczegóły
-        </Button>
+        <p>ID: {{ basicContact.id }}</p>
+        <p>Imię: {{ basicContact.firstName }}</p>
+        <p>Nazwisko: {{ basicContact.lastName }}</p>
+        <p>Email: {{ basicContact.email }}</p>
       </div>
-      <div *ngIf="isLoggedIn">
-        <Button routerLink="/contacts/edit/{{ basicContact.id }}">
-          Edytuj
-        </Button>
-      </div>
-      <div *ngIf="isLoggedIn">
-        <Button (click)="deleteContact(basicContact.id)">
-          Usuń
-        </Button>
+      <div>
+        <div>
+          <Button routerLink="/contacts/{{ basicContact.id }}">
+            Zobacz szczegóły
+          </Button>
+        </div>
+        <div *ngIf="isLoggedIn">
+          <Button routerLink="/contacts/edit/{{ basicContact.id }}">
+            Edytuj
+          </Button>
+        </div>
+        <div *ngIf="isLoggedIn">
+          <Button (click)="deleteContact(basicContact.id)">
+            Usuń
+          </Button>
+        </div>
       </div>
     </div>
   </div>
+  <ng-template #noContacts>
+    <p>Nie ma jeszcze żadnych kontaktów</p>
+  </ng-template>
 </div>
