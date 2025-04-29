@@ -11,6 +11,8 @@
 
 - Frontend -> Angular SPA
 
+## Dokumentacja
+ - Dokumentacja API znajduje się pod adresem /swagger/index.html
 
 ## Struktura backend (główne komponenty)
 - Controllers -> kontrolery API
