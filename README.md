@@ -4,6 +4,11 @@
 - Umożliwia logowanie i rejestracje użytkowników.
 - Hasła są hashowane, a operacje edycji, usunięcia i dodania nowego kontaktu dostępne są tylko po zalogowaniu.
 
+## Użycie aplikacji
+ - Zarejestruj się
+ - Możesz przeglądać, dodawać, edytować i usuwać kontakty!
+ - Śmiało możesz dodać pierwszy kontakt!
+
 ## Technologie
 
 - Backend -> (.Net 8.0) ASP.NET Core web API + SQLServer  
