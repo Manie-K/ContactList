@@ -37,7 +37,8 @@ namespace ContactListAPI.Controllers
             }
 
             var token = _tokenService.GenerateToken(user);
-            return Ok(new { token });
+            
+            return Ok(new AuthResponseDTO(){ Token = token, Name = user.Name });
         }
 
         [HttpPost("register")]
@@ -51,7 +52,8 @@ namespace ContactListAPI.Controllers
             User user = await _userService.AddUserAsync(dto);
 
             var token = _tokenService.GenerateToken(user);
-            return Ok(new { token });
+            return Ok(new AuthResponseDTO() { Token = token, Name = user.Name });
+
         }
     }
 }

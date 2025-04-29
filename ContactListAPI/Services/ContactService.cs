@@ -1,4 +1,6 @@
-﻿using ContactListAPI.Data;
+﻿using System.Security.Cryptography;
+using System.Text;
+using ContactListAPI.Data;
 using ContactListAPI.DTO;
 using ContactListAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -15,22 +17,28 @@ namespace ContactListAPI.Services
         }
 
         private GetContactDTO ContactToDTO(Contact contact) =>
-            new GetContactDTO
-            {
-                Id = contact.Id,
-                FirstName = contact.FirstName,
-                LastName = contact.LastName,
-                Email = contact.Email,
-                Category = contact.Category,
-                Subcategory = contact.Subcategory,
-                Phone = contact.Phone,
-                DateOfBirth = contact.DateOfBirth
-            };
+           new GetContactDTO
+           {
+               Id = contact.Id,
+               FirstName = contact.FirstName,
+               LastName = contact.LastName,
+               Email = contact.Email,
+               Category = contact.Category,
+               Subcategory = contact.Subcategory,
+               Phone = contact.Phone,
+               DateOfBirth = contact.DateOfBirth
+           };
 
-        public async Task<IEnumerable<GetContactDTO>> GetAllContactsAsync()
+        public async Task<IEnumerable<GetBasicContactDTO>> GetAllContactsAsync()
         {
             IEnumerable<Contact> contacts = await _context.Contacts.ToListAsync();
-            IEnumerable<GetContactDTO> dtos = contacts.Select(ContactToDTO);
+            IEnumerable<GetBasicContactDTO> dtos = contacts.Select(c => new GetBasicContactDTO
+            {
+                Id = c.Id,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email
+            });
             return dtos;
         }
 
@@ -41,13 +49,33 @@ namespace ContactListAPI.Services
             return dto;
         }
 
-        public async Task<GetContactDTO> AddContactAsync(CreateContactDTO dto)
+        public async Task<GetContactDTO?> AddContactAsync(CreateContactDTO dto)
         {
+            bool emailTaken = false;
+            var allContacts = await _context.Contacts.ToListAsync();
+            allContacts.Select(c => c.Email).ToList().ForEach(email =>
+            {
+                if (email == dto.Email)
+                {
+                    emailTaken = true;
+                }
+            });
+            if (emailTaken)
+            {
+                return null;
+            }
+
+            using var hmac = new System.Security.Cryptography.HMACSHA256();
+            var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dto.Password));
+            var salt = hmac.Key;
+
             Contact contact = new Contact
             {
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
+                PasswordHash = hash, 
+                PasswordSalt = salt,
                 Category = dto.Category,
                 Subcategory = dto.Subcategory,
                 Phone = dto.Phone,

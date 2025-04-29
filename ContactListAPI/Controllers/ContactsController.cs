@@ -27,9 +27,9 @@ namespace ContactListAPI.Controllers
         // GET: api/Contacts
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<List<GetContactDTO>>> GetAllContacts()
+        public async Task<ActionResult<List<GetBasicContactDTO>>> GetAllContacts()
         {
-            List<GetContactDTO> res = (await _contactService.GetAllContactsAsync()).ToList();
+            List<GetBasicContactDTO> res = (await _contactService.GetAllContactsAsync()).ToList();
             return res;
         }
 
@@ -62,7 +62,11 @@ namespace ContactListAPI.Controllers
             {
                 return BadRequest();
             }
-            GetContactDTO createdDto = await _contactService.AddContactAsync(dto);
+            GetContactDTO? createdDto = await _contactService.AddContactAsync(dto);
+            if (createdDto == null)
+            {
+                return BadRequest();
+            }
             return CreatedAtAction(nameof(GetContactById), new { id = createdDto.Id }, createdDto);
         }
 

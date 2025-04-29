@@ -1,9 +1,10 @@
-﻿using ContactListAPI.Models;
+﻿using ContactListAPI.DTO;
+using ContactListAPI.Models;
 
 namespace ContactListAPI.Services
 {
     public interface ICategoryService
     {
-        public Task<List<Category>> GetAllCategoriesAsync();
+        public Task<List<GetCategoryDTO>> GetAllCategoriesAsync();
     }
 }

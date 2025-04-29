@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddDbContext<ContactListDataContext>(options =>
 {
@@ -37,11 +38,9 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
 // Configure CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
-        builder =>
-        {
+    options.AddPolicy("AllowFrontendOnly",policy => {
             //TODO: Allow only frontend app
-            builder.AllowAnyOrigin()
+            policy.AllowAnyOrigin()
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
@@ -57,6 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowFrontendOnly");
+app.UseRouting();
 
 app.UseHttpsRedirection();
 
